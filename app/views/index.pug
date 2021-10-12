@@ -1,5 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 CAB432 Assignment 2 - Twitter Streams
+  p Search Bar
+  form(role='search', id='searchForm')
+    input(type='text', name='q', id='searchText', placeholder='Enter search term')
+    button Search 
+  h2 Data
+  .stream
+  .stream
+  .stream
+  .stream
+  .stream
+  script(src='/javascripts/search.js')
