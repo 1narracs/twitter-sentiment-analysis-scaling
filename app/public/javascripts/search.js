@@ -1,52 +1,60 @@
 // Get twitter information when searched
-
 const twitterProfileAmount = 5;
-
 let count = 0;
-
 
 const twitterData = (event) => {
     event.preventDefault();
-    const searchedTerm = document.getElementById('searchText').value
+    let searchedTerm = document.getElementById('searchText').value
     document.getElementById('searchText').value = '';
     //console.log(searchEvent.target.textContent);
 
-    // Some sorta regex thingy here needed? 1 space can't get by, but 2 spaces can
-    // Maybe replace everything but spaces and a-zA-Z, then split on ' ' for multiple queries?
-    if (searchedTerm == 'bad' || searchedTerm == ' '){
-        //
+    searchedTerm = searchedTerm.replace(/[^a-zA-Z]+/g, ' ');
+    searchedTerm = searchedTerm.trim();
+
+    const warningDiv = document.getElementById('warning');
+    while(warningDiv.firstChild){
+        warningDiv.removeChild(warningDiv.firstChild)
+    }
+    if (searchedTerm == ''){
+        const warningText = document.createElement("p");
+        warningText.textContent =  "Bad search, please only use letters.";
+        warningDiv.appendChild(warningText);
     }
     else{
-        fetch(`/data/twitter/${searchedTerm}`)
-        .then( (response) => {
-            return response.json();
-        })
-        .then ((data) => {
-            console.log(data);
-            if (data.source == "No Source"){
-                //
-            }
-            else{
+        const searchedTerms = searchedTerm.split(' ');
+        searchedTerms.forEach(element => {
+            fetch(`/data/twitter/${element.toLowerCase()}`)
+            .then( (response) => {
+                return response.json();
+            })
+            .then ((data) => {
+                console.log(data);
                 const chosenDiv = (document.getElementsByClassName('stream')).item(count % twitterProfileAmount);
+                count++;
                 while(chosenDiv.firstChild){
                     chosenDiv.removeChild(chosenDiv.firstChild)
                 }
                 const heading = document.createElement("h3");
-                heading.textContent =  data.tagName;
+                heading.textContent =  element;
                 chosenDiv.appendChild(heading);
-                const sentiment = document.createElement("p");
-                sentiment.textContent =  'Overall sentiment: ' + data.overallSentiment;
-                chosenDiv.appendChild(sentiment);
-                const importantTerms = document.createElement("p");
-                importantTerms.textContent =  'Important terms: ' + data.importantTerms;
-                chosenDiv.appendChild(importantTerms);
-                count++;
-                //return profileData;
-            }
-        })
-        .catch((error) =>{
-            console.log(error);
-        })
+                if (data.source == "No Source"){
+                    const noData = document.createElement("p");
+                    noData.textContent =  'No data was able to be retrived';
+                    chosenDiv.appendChild(noData);
+                }
+                else{
+                    const sentiment = document.createElement("p");
+                    sentiment.textContent =  'Overall sentiment: ' + data.overallSentiment;
+                    chosenDiv.appendChild(sentiment);
+                    const importantTerms = document.createElement("p");
+                    importantTerms.textContent =  'Important terms: ' + data.importantTerms;
+                    chosenDiv.appendChild(importantTerms);
+                }
+            })
+            .catch((error) =>{
+                console.log(error);
+            })
+        });
     }
 }
 

@@ -2,10 +2,12 @@ extends layout
 
 block content
   h1 CAB432 Assignment 2 - Twitter Streams
-  p Search Bar
+  h2 Application Usage 
+  p Enter 1-5 words into the search query below to gather sentiments values and important terms using data obtained from twitter.
   form(role='search', id='searchForm')
     input(type='text', name='q', id='searchText', placeholder='Enter search term')
     button Search 
+  #warning
   h2 Data
   .stream
   .stream
