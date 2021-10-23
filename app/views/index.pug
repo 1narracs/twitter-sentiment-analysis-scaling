@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  
   h1 CAB432 Assignment 2 - Twitter Streams
   h2 Application Usage 
   p Enter 1-5 words into the search query below to gather sentiments values and important terms using data obtained from twitter.
@@ -14,6 +15,7 @@ block content
   .stream
   .stream
   .stream
+  script(src='/javascripts/search.js')
   .container-fluid
     .row
       .col-md-12.col-lg-8
@@ -22,4 +24,3 @@ block content
       .col-md-12.col-lg-4
         h1#colh1 Important Terms
         div#collapsibletree
-  
