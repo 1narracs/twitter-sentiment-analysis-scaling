@@ -1,4 +1,4 @@
-const hashtagData=[
+const serverData= {hashtagData: [
     { hashtag: 'batman', sentiment: 'very-negative', value: '2' },
     { hashtag: 'batman', sentiment: 'negative', value: '4' },
     { hashtag: 'batman', sentiment: 'somewhat-negative', value: '7' },
@@ -10,36 +10,39 @@ const hashtagData=[
     { hashtag: 'spiderman', sentiment: 'somewhat-negative', value: '9' },
     { hashtag: 'spiderman', sentiment: 'somewhat-positive', value: '14' },
     { hashtag: 'spiderman', sentiment: 'positive', value: '13' },
-    { hashtag: 'spiderman', sentiment: 'very-positive', value: '3' },
-];
+    { hashtag: 'spiderman', sentiment: 'very-positive', value: '3' }
+],
+    importantWords: 
+    [{
+        name: 'batman',
+        children: [
+            { name: "jamesthefourth"},
+            { name: "amazing" },
+            { name: "tomeu" },
+            { name: "morey" },
+            { name: "care" },
+            { name: "anyway" },
+            { name: "script" },
+            { name: "colors" },
+            { name: "oh" },
+            { name: "wow" }
+        ]
+    },
+    {
+        name: 'spiderman',
+        children: [
+            { name: "hello" },
+            { name: "this" },
+            { name: "is" },
+            { name: "a" },
+            { name: "test" },
+            { name: "wow" }
+        ]
+    }
+    ]
+};
 
-const freqWords = [{
-    name: 'batman',
-    children: [
-        { name: "jamesthefourth", value: 4116},
-        { name: "amazing" },
-        { name: "tomeu" },
-        { name: "morey" },
-        { name: "care" },
-        { name: "anyway" },
-        { name: "script" },
-        { name: "colors" },
-        { name: "oh" },
-        { name: "wow" }
-    ]
-},
-{
-    name: 'spiderman',
-    children: [
-        { name: "hello" },
-        { name: "this" },
-        { name: "is" },
-        { name: "a" },
-        { name: "test" },
-        { name: "wow" }
-    ]
-}
-];
+
 
 function PrepareData(data) {
 
@@ -71,17 +74,17 @@ function PrepareData(data) {
 
 }
 
-var prepedData = PrepareData(hashtagData);
+var prepedSentimentData = PrepareData(serverData.hashtagData);
 
-const sentimentChart=StackedBarChart(PrepareData(hashtagData), {
+const sentimentChart=StackedBarChart(prepedSentimentData, {
     x: d => d.proportion,
     y: d => d.hashtag,
     z: d => d.sentiment,
     // title: "Tweet Sentiments",
     xFormat: "+%",
     xLabel: "← Negative Sentiment · Sentiment · Positive Sentiment →",
-    yDomain: d3.groupSort(prepedData, D => d3.sum(D, d => -Math.min(0, d.proportion)), d => d.hashtag),
-    zDomain: prepedData.sentiments,
+    yDomain: d3.groupSort(prepedSentimentData, D => d3.sum(D, d => -Math.min(0, d.proportion)), d => d.hashtag),
+    zDomain: prepedSentimentData.sentiments,
     width:1140,
     height:120,
     marginLeft: 70
@@ -228,7 +231,7 @@ function StackedBarChart(data, {
 
 // Collapsible Tree Stuff
 // reverse data array to match order of sentiment graph
-freqWords.slice().reverse().forEach(element => {
+serverData.importantWords.slice().reverse().forEach(element => {
     var tidyTree = TidyTree(element);
     d3.select('#collapsibletree')
         .append('div.row')

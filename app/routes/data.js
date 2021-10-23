@@ -28,6 +28,7 @@ redisClient.on('error', (err) => {
 const bucketName = 'n9469818-n10763929-twitter-application';
 
 router.get('/twitter/:tag', function(req, res) {
+
     const { tag } = req.params;
 
     const keyFullDataObject = `twitter:${tag}-all`;
@@ -543,8 +544,10 @@ function GetTweets(id){
     });
 }
 
+
 // Create twitter client to be used to obtain tweets
 const twitterClient = new Twitter({
+    
     consumer_key: process.env.TWITTER_KEY,
     consumer_secret: process.env.TWITTER_SECRET,
     bearer_token: process.env.TWITTER_BEARER
