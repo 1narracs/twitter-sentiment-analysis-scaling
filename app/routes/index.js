@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Twitter Data' });
+  res.render('index', { title: 'Tweet Analysis App' });
 });
 
 module.exports = router;
