@@ -13,7 +13,7 @@ function drawBarChart(data) {
         yDomain: d3.groupSort(prepedSentimentData, D => d3.sum(D, d => -Math.min(0, d.proportion)), d => d.hashtag),
         zDomain: prepedSentimentData.sentiments,
         width: 1140,
-        height: 60 * noOfQueries,
+        height: 80 * noOfQueries,
         marginLeft: 70
     });
 
@@ -197,7 +197,7 @@ function drawTidyTree(data) {
     // Remove all previoud divs, so none are duplicated
     document.querySelectorAll('.singleTree').forEach(e => e.remove());
 
-    
+
     data.importantWords.slice().reverse().forEach(element => {
         var tidyTree = TidyTree(element);
         d3.select('#tidyTree')

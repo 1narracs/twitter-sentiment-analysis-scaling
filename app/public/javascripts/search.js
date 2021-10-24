@@ -13,7 +13,7 @@ const twitterData = (event) => {
     document.getElementById('searchText').value = '';
     //console.log(searchEvent.target.textContent);
 
-    searchedTerm = searchedTerm.replace(/[^a-zA-Z]+/g, ' ');
+    searchedTerm = searchedTerm.replace(/[^a-zA-Z0-9\_]+/g, ' ');
     searchedTerm = searchedTerm.trim();
 
     const warningDiv = document.getElementById('warning');
