@@ -13,19 +13,15 @@ const twitterData = (event) => {
     event.preventDefault();
     let searchedTerm = document.getElementById('searchText').value
     document.getElementById('searchText').value = '';
-    //console.log(searchEvent.target.textContent);
 
     searchedTerm = searchedTerm.replace(/[^a-zA-Z0-9\_]+/g, ' ');
     searchedTerm = searchedTerm.trim();
-
 
     while (warningDiv.firstChild) {
         warningDiv.removeChild(warningDiv.firstChild)
     }
     if (searchedTerm == '') {
-        const warningText = document.createElement("p");
-        warningText.textContent = "Bad search, please only use letters.";
-        warningDiv.appendChild(warningText);
+        appendWarning('Bad search, please only use letters.');
     }
     else {
         const searchedTerms = searchedTerm.split(' ');
