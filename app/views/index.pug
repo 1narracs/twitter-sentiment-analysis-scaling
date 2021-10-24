@@ -1,22 +1,24 @@
 extends layout
 
 block content
-  
-  h1 CAB432 Assignment 2 - Twitter Streams
-  h2 Application Usage 
-  p Enter 1-5 words into the search query below to gather sentiments values and important terms using data obtained from twitter.
-  form(role='search', id='searchForm')
-    input(type='text', name='q', id='searchText', placeholder='Enter search term')
-    button Search 
-  #warning
-  h2 Data
+  .col-lg-12.text-center.mt-5
+    h1 CAB432 Assignment 2 - Twitter Streams
+        h3 Application Usage 
+        p Enter 1-5 words into the search query below to gather sentiments values and important terms using data obtained from twitter.
+  .col-md-4.offset-md-4.mt-5
+    form(role='search', id='searchForm')
+      .input-group.mb-3
+        input.form-control(type='text', name='q', id='searchText', placeholder='Enter search term')
+        button.btn.btn-primary Search 
+      #warning
+  h2 Data test
   .stream
   .stream
   .stream
   .stream
   .stream
   script(src='/javascripts/search.js')
-  .container-fluid
+  .container-fluid#contentContainer
     .row
       .col-md-12.col-lg-8
         h1#colh1 Tweet Sentiments

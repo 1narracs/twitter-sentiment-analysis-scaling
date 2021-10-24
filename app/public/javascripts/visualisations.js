@@ -1,49 +1,25 @@
-const serverData= {hashtagData: [
-    { hashtag: 'batman', sentiment: 'very-negative', value: '2' },
-    { hashtag: 'batman', sentiment: 'negative', value: '4' },
-    { hashtag: 'batman', sentiment: 'somewhat-negative', value: '7' },
-    { hashtag: 'batman', sentiment: 'somewhat-positive', value: '15' },
-    { hashtag: 'batman', sentiment: 'positive', value: '8' },
-    { hashtag: 'batman', sentiment: 'very-positive', value: '10' },
-    { hashtag: 'spiderman', sentiment: 'very-negative', value: '20' },
-    { hashtag: 'spiderman', sentiment: 'negative', value: '3' },
-    { hashtag: 'spiderman', sentiment: 'somewhat-negative', value: '9' },
-    { hashtag: 'spiderman', sentiment: 'somewhat-positive', value: '14' },
-    { hashtag: 'spiderman', sentiment: 'positive', value: '13' },
-    { hashtag: 'spiderman', sentiment: 'very-positive', value: '3' }
-],
-    importantWords: 
-    [{
-        name: 'batman',
-        children: [
-            { name: "jamesthefourth"},
-            { name: "amazing" },
-            { name: "tomeu" },
-            { name: "morey" },
-            { name: "care" },
-            { name: "anyway" },
-            { name: "script" },
-            { name: "colors" },
-            { name: "oh" },
-            { name: "wow" }
-        ]
-    },
-    {
-        name: 'spiderman',
-        children: [
-            { name: "hello" },
-            { name: "this" },
-            { name: "is" },
-            { name: "a" },
-            { name: "test" },
-            { name: "wow" }
-        ]
-    }
-    ]
-};
+// Prepares data for the sentiment graph
+var prepedSentimentData = PrepareData(serverData.hashtagData);
 
+// Set up variables for the Bar Chart function
+const sentimentChart=StackedBarChart(prepedSentimentData, {
+    x: d => d.proportion,
+    y: d => d.hashtag,
+    z: d => d.sentiment,
+    // title: "Tweet Sentiments",
+    xFormat: "+%",
+    xLabel: "← Negative Sentiment · Sentiment · Positive Sentiment →",
+    yDomain: d3.groupSort(prepedSentimentData, D => d3.sum(D, d => -Math.min(0, d.proportion)), d => d.hashtag),
+    zDomain: prepedSentimentData.sentiments,
+    width:1140,
+    height:120,
+    marginLeft: 70
+});
 
+// Appends the barchart to the correct place on the DOM
+d3.select("#barchart").html(sentimentChart.outerHTML);
 
+// This function sets up the data received from the server to work with the D3 function
 function PrepareData(data) {
 
     // A map to prepare the hashtag sentiment info for visualisation with D3.js
@@ -73,24 +49,6 @@ function PrepareData(data) {
     });
 
 }
-
-var prepedSentimentData = PrepareData(serverData.hashtagData);
-
-const sentimentChart=StackedBarChart(prepedSentimentData, {
-    x: d => d.proportion,
-    y: d => d.hashtag,
-    z: d => d.sentiment,
-    // title: "Tweet Sentiments",
-    xFormat: "+%",
-    xLabel: "← Negative Sentiment · Sentiment · Positive Sentiment →",
-    yDomain: d3.groupSort(prepedSentimentData, D => d3.sum(D, d => -Math.min(0, d.proportion)), d => d.hashtag),
-    zDomain: prepedSentimentData.sentiments,
-    width:1140,
-    height:120,
-    marginLeft: 70
-});
-
-d3.select("#barchart").html(sentimentChart.outerHTML);
 
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
@@ -242,7 +200,7 @@ serverData.importantWords.slice().reverse().forEach(element => {
 // Released under the ISC license.
 // https://observablehq.com/@d3/tidy-tree
 function TidyTree(data, {
-    width = 570,
+    width = 400,
     tree = data => {
         const root = d3.hierarchy(data);
         root.dx = 10;

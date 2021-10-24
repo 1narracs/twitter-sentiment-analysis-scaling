@@ -1,8 +1,35 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #14171A;
+  color: #1DA1F2;
 }
 
 a {
   color: #00B7FF;
+}
+
+#headingcol {
+  margin: 0 auto !important;
+  text-align: center !important;
+  align-items: center !important;
+}
+
+.btn-primary {
+  background-color: #1DA1F2;
+}
+
+.form-control {
+  min-width: 20vw !important;
+}
+
+.input-group {
+  max-width: 50vw !important;
+  align-items: center !important;
+  align-content: center !important;
+  align-self: inherit !important;
+}
+
+#contentContainer {
+  color:#F5F8FA !important;
 }
