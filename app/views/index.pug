@@ -11,17 +11,32 @@ block content
         input.form-control(type='text', name='q', id='searchText', placeholder='Enter search term')
         button.btn.btn-primary Search 
       #warning
-  .stream
-  .stream
-  .stream
-  .stream
-  .stream
   script(src='/javascripts/search.js')
   .container-fluid#contentContainer
     .row
       .col-md-12.col-lg-8
         h1#colh1 Tweet Sentiments
+        ul.legend
+          li
+            span.very-negative
+            |  Very Negative
+          li
+            span.negative 
+            |  Negative
+          li
+            span.somewhat-negative
+            |  Somewhat Negative
+          li
+            span.somewhat-positive
+            |  Somewhat Positive
+          li
+            span.positive
+            |  Positive
+          li
+            span.very-positive
+            |  Very Positive
+
         div#barchart
       .col-md-12.col-lg-4
         h1#colh1 Important Terms
-        div#collapsibletree
+        div#tidyTree

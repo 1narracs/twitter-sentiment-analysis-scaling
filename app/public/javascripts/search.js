@@ -37,17 +37,14 @@ const twitterData = (event) => {
 
                     console.log(data);
 
-                    // console.log("set up data fn");
-                    // SetUpServerData(data);
-                    // console.log(serverDataPreped);
-                    // const chosenDiv = (document.getElementsByClassName('stream')).item(count % twitterProfileAmount);
-                    // count++;
-                    // while(chosenDiv.firstChild){
-                    //     chosenDiv.removeChild(chosenDiv.firstChild)
-                    // }
-                    // const heading = document.createElement("h3");
-                    // heading.textContent =  element;
-                    // chosenDiv.appendChild(heading);
+                    SetUpServerData(data);
+
+                    drawBarChart(serverDataPreped);
+
+                    drawTidyTree(serverDataPreped);
+
+                    console.log(serverDataPreped);
+
                     if (data.source == "No Source") {
                         // No source block
                         const noData = document.createElement("p");
@@ -55,13 +52,7 @@ const twitterData = (event) => {
                         warningDiv.appendChild(noData);
                     }
                     else {
-                        // Found source block
-                        // const sentiment = document.createElement("p");
-                        // sentiment.textContent =  'Overall sentiment: ' + data.overallSentiment;
-                        // chosenDiv.appendChild(sentiment);
-                        // const importantTerms = document.createElement("p");
-                        // importantTerms.textContent =  'Important terms: ' + data.importantTerms;
-                        // chosenDiv.appendChild(importantTerms);
+
                     }
                 })
                 .catch((error) => {
@@ -69,17 +60,15 @@ const twitterData = (event) => {
                     console.log(error);
                 })
         });
-        
     }
-    console.log(serverDataPreped);
 }
 
-function reloadDIV() { document.getElementById("contentContainer").innerHTML.reload }
 
 // Function to set up data object that can be handled by visualisations.js
 function SetUpServerData(data) {
     let hashtagObjArray = [];
     let importantWordsObj = { name: data.id, children: [] };
+
 
     // Remove the oldest data from the data obj if its length exceed the maximum allowed length
     if (serverDataPreped.importantWords.length >= twitterProfileAmount && serverDataPreped.hashtagData.length >= twitterProfileAmount * 6) {

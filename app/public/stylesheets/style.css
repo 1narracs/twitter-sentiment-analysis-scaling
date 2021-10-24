@@ -1,5 +1,7 @@
 body {
-  padding: 50px;
+  padding: 10px;
+  padding-left: 50px;
+  padding-right: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #14171A;
   color: #1DA1F2;
@@ -31,5 +33,18 @@ a {
 }
 
 #contentContainer {
+  padding-top: 3rem;
   color:#F5F8FA !important;
 }
+
+/* basic positioning */
+.legend { list-style: none; padding: 15px !important;}
+.legend li { float: left; margin-right: 10px;}
+.legend span { border: 0px solid #ccc; float: left; width: 12px; height: 12px; margin: 2px; }
+/* your colors */
+.legend .very-negative { margin-right: 2.5px; background-color: #d53e4f; }
+.legend .negative { margin-right: 2.5px; background-color: #fc8d59; }
+.legend .somewhat-negative { margin-right: 2.5px; background-color: #fee08b; }
+.legend .somewhat-positive { margin-right: 2.5px; background-color: #e6f598; }
+.legend .positive { margin-right: 2.5px; background-color: #99d594; }
+.legend .very-positive { margin-right: 2.5px; background-color: #3288bd; }
