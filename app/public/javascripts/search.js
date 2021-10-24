@@ -51,9 +51,6 @@ const twitterData = (event) => {
                         noData.textContent = 'No data was able to be retrived!';
                         warningDiv.appendChild(noData);
                     }
-                    else {
-
-                    }
                 })
                 .catch((error) => {
                     // There may be an issue with .env / twitter API key stuff
@@ -96,47 +93,47 @@ function SetUpServerData(data) {
 
 document.getElementById('searchForm').addEventListener('submit', twitterData);
 
-const serverDataTest = {
-    hashtagData: [
-        { hashtag: 'batman', sentiment: 'very-negative', value: '2' },
-        { hashtag: 'batman', sentiment: 'negative', value: '4' },
-        { hashtag: 'batman', sentiment: 'somewhat-negative', value: '7' },
-        { hashtag: 'batman', sentiment: 'somewhat-positive', value: '15' },
-        { hashtag: 'batman', sentiment: 'positive', value: '8' },
-        { hashtag: 'batman', sentiment: 'very-positive', value: '10' },
-        { hashtag: 'spiderman', sentiment: 'very-negative', value: '20' },
-        { hashtag: 'spiderman', sentiment: 'negative', value: '3' },
-        { hashtag: 'spiderman', sentiment: 'somewhat-negative', value: '9' },
-        { hashtag: 'spiderman', sentiment: 'somewhat-positive', value: '14' },
-        { hashtag: 'spiderman', sentiment: 'positive', value: '13' },
-        { hashtag: 'spiderman', sentiment: 'very-positive', value: '3' }
-    ],
-    importantWords:
-        [{
-            name: 'batman',
-            children: [
-                { name: "jamesthefourth" },
-                { name: "amazing" },
-                { name: "tomeu" },
-                { name: "morey" },
-                { name: "care" },
-                { name: "anyway" },
-                { name: "script" },
-                { name: "colors" },
-                { name: "oh" },
-                { name: "wow" }
-            ]
-        },
-        {
-            name: 'spiderman',
-            children: [
-                { name: "hello" },
-                { name: "this" },
-                { name: "is" },
-                { name: "a" },
-                { name: "test" },
-                { name: "wow" }
-            ]
-        }
-        ]
-};
+// const serverDataTest = {
+//     hashtagData: [
+//         { hashtag: 'batman', sentiment: 'very-negative', value: '2' },
+//         { hashtag: 'batman', sentiment: 'negative', value: '4' },
+//         { hashtag: 'batman', sentiment: 'somewhat-negative', value: '7' },
+//         { hashtag: 'batman', sentiment: 'somewhat-positive', value: '15' },
+//         { hashtag: 'batman', sentiment: 'positive', value: '8' },
+//         { hashtag: 'batman', sentiment: 'very-positive', value: '10' },
+//         { hashtag: 'spiderman', sentiment: 'very-negative', value: '20' },
+//         { hashtag: 'spiderman', sentiment: 'negative', value: '3' },
+//         { hashtag: 'spiderman', sentiment: 'somewhat-negative', value: '9' },
+//         { hashtag: 'spiderman', sentiment: 'somewhat-positive', value: '14' },
+//         { hashtag: 'spiderman', sentiment: 'positive', value: '13' },
+//         { hashtag: 'spiderman', sentiment: 'very-positive', value: '3' }
+//     ],
+//     importantWords:
+//         [{
+//             name: 'batman',
+//             children: [
+//                 { name: "jamesthefourth" },
+//                 { name: "amazing" },
+//                 { name: "tomeu" },
+//                 { name: "morey" },
+//                 { name: "care" },
+//                 { name: "anyway" },
+//                 { name: "script" },
+//                 { name: "colors" },
+//                 { name: "oh" },
+//                 { name: "wow" }
+//             ]
+//         },
+//         {
+//             name: 'spiderman',
+//             children: [
+//                 { name: "hello" },
+//                 { name: "this" },
+//                 { name: "is" },
+//                 { name: "a" },
+//                 { name: "test" },
+//                 { name: "wow" }
+//             ]
+//         }
+//         ]
+// };
