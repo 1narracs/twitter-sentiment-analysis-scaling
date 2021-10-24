@@ -1,5 +1,5 @@
 // Prepares data for the sentiment graph
-var prepedSentimentData = PrepareData(serverData.hashtagData);
+var prepedSentimentData = PrepareData(serverDataTest.hashtagData);
 
 // Set up variables for the Bar Chart function
 const sentimentChart=StackedBarChart(prepedSentimentData, {
@@ -189,7 +189,7 @@ function StackedBarChart(data, {
 
 // Collapsible Tree Stuff
 // reverse data array to match order of sentiment graph
-serverData.importantWords.slice().reverse().forEach(element => {
+serverDataPreped.importantWords.slice().reverse().forEach(element => {
     var tidyTree = TidyTree(element);
     d3.select('#collapsibletree')
         .append('div.row')

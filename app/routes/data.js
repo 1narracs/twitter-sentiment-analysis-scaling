@@ -69,7 +69,7 @@ router.get('/twitter/:tag', function(req, res) {
                                 id: tag,
                                 source: 'S3 Bucket',
                                 overallSentiment: sentimentData.averageSentiment,
-                                sentimentsVeryPostive: sentimentData.sentimentsVeryPostive,
+                                sentimentsVeryPositive: sentimentData.sentimentsVeryPositive,
                                 sentimentsPositive: sentimentData.sentimentsPositive,
                                 sentimentsSomewhatPositive: sentimentData.sentimentsSomewhatPositive,
                                 sentimentsNeutral: sentimentData.sentimentsNeutral,
@@ -214,7 +214,7 @@ function GetProcessedSentiment(id){
 
                             const processedSentimentObject = {
                                 averageSentiment: totalSentiment / totalCount,
-                                sentimentsVeryPostive: veryPositiveSentiments,
+                                sentimentsVeryPositive: veryPositiveSentiments,
                                 sentimentsPositive: positiveSentiments,
                                 sentimentsSomewhatPositive: somewhatPositiveSentiments,
                                 sentimentsNeutral: neutralSentiments,
