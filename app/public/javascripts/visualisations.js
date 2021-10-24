@@ -13,7 +13,7 @@ function drawBarChart(data) {
         yDomain: d3.groupSort(prepedSentimentData, D => d3.sum(D, d => -Math.min(0, d.proportion)), d => d.hashtag),
         zDomain: prepedSentimentData.sentiments,
         width: 1140,
-        height: 80 * noOfQueries,
+        height: 75 * noOfQueries,
         marginLeft: 70
     });
 
