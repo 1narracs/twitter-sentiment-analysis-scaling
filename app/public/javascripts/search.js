@@ -45,10 +45,6 @@ const twitterData = (event) => {
                     // Reset warning text
                     warningText = '';
 
-                    // if (data.source == "No Source") {
-                    //     // No source block
-                    //     appendWarning('No data was able to be retrieved!');
-                    // }
                 })
                 .catch((error) => {
                     // There may be an issue with .env / twitter API key stuff

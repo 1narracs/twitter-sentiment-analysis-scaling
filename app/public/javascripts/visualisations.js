@@ -7,7 +7,6 @@ function drawBarChart(data) {
         x: d => d.proportion,
         y: d => d.hashtag,
         z: d => d.sentiment,
-        // title: "Tweet Sentiments",
         xFormat: "+%",
         xLabel: "← Negative Sentiment · Sentiment · Positive Sentiment →",
         yDomain: d3.groupSort(prepedSentimentData, D => d3.sum(D, d => -Math.min(0, d.proportion)), d => d.hashtag),
@@ -192,12 +191,12 @@ function StackedBarChart(data, {
 
 // Tidy Tree Stuff
 
-// Reverse data array to match order of sentiment graph
+// Draws the Tidy Tree using the TidyTree() function
 function drawTidyTree(data) {
-    // Remove all previoud divs, so none are duplicated
+    // Remove all previous divs, so none are duplicated
     document.querySelectorAll('.singleTree').forEach(e => e.remove());
 
-
+    // Reverse data array to match order of sentiment graph
     data.importantWords.slice().reverse().forEach(element => {
         var tidyTree = TidyTree(element);
         d3.select('#tidyTree')
