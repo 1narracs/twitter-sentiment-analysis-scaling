@@ -32,21 +32,23 @@ const twitterData = (event) => {
                 })
                 .then((data) => {
                     // Handle server data block
+
+                    // Ensure that warningText is blank
+                    warningText = '';
+
+                    // Set up, handle misuse, and draw visualisations
                     SetUpServerData(data);
-
-                    drawBarChart(serverDataPreped);
-
-                    drawTidyTree(serverDataPreped);
 
                     // This only does something if warningText has been updated
                     appendWarning(warningText);
+
                     // Reset warning text
                     warningText = '';
 
-                    if (data.source == "No Source") {
-                        // No source block
-                        appendWarning('No data was able to be retrieved!');
-                    }
+                    // if (data.source == "No Source") {
+                    //     // No source block
+                    //     appendWarning('No data was able to be retrieved!');
+                    // }
                 })
                 .catch((error) => {
                     // There may be an issue with .env / twitter API key stuff
@@ -64,11 +66,14 @@ function SetUpServerData(data) {
 
     const found = serverDataPreped.importantWords.some(el => el.name === data.id);
 
-    // Handles a term being entered twice on the page
-    if (found) {
+    
+    if (found) { // Handles a term being entered twice on the page
         console.log("Duplicate Found!");
         warningText = 'Search term already exists on the page!';
-    } else {
+    } else if (data.source == "No Source") { // Handles no hashtag data being found
+        console.log("No results found");
+        warningText = 'No data was able to be retrieved for your query!';
+    } else { // If data is found and is not duplicate, sets up data objects and draws visualisations
         console.log("No duplicate found!");
         // Remove the oldest data from the data obj if its length exceed the maximum allowed length
         if (serverDataPreped.importantWords.length >= twitterProfileAmount && serverDataPreped.hashtagData.length >= twitterProfileAmount * 6) {
@@ -92,6 +97,10 @@ function SetUpServerData(data) {
 
         serverDataPreped.importantWords.push(importantWordsObj);
         serverDataPreped.hashtagData = serverDataPreped.hashtagData.concat(hashtagObjArray);
+
+        drawBarChart(serverDataPreped);
+
+        drawTidyTree(serverDataPreped);
     }
 };
 
