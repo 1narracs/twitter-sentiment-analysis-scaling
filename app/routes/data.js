@@ -53,7 +53,7 @@ router.get('/twitter/:tag', function(req, res) {
                     const twitterDataObject = s3ResultParsed.twitterDataObject;
                     twitterDataObject.source = 'Redis Cache';
                     // Add to cache
-                    redisClient.setex(keyFullDataObject, 3600, JSON.stringify({twitterDataObject}));
+                    redisClient.setex(keyFullDataObject, 60, JSON.stringify({twitterDataObject}));
                     twitterDataObject.source = 'S3 Bucket';
                     return res.json(twitterDataObject);
                 } else {
@@ -110,7 +110,7 @@ router.get('/twitter/:tag', function(req, res) {
                                 console.log('Error uploading/delete objects in S3:\n' + error);
                             });
                             twitterDataObject.source = 'Redis Cache'
-                            redisClient.setex(keyFullDataObject, 3600, JSON.stringify({twitterDataObject}));
+                            redisClient.setex(keyFullDataObject, 60, JSON.stringify({twitterDataObject}));
                             
                             // ------------------------ Return page with data ------------------------  //
                             console.log('Render page with json data');
@@ -165,7 +165,7 @@ function GetProcessedSentiment(id){
                         console.log("Processed sentiment served from S3");
                         const s3ResultParsed = JSON.parse(s3Result.Body);
                         // Add to cache
-                        redisClient.setex(keySentimentProcessed, 360, s3Result.Body);
+                        redisClient.setex(keySentimentProcessed, 60, s3Result.Body);
                         resolve(s3ResultParsed.processedSentimentObject);
                     } else {
                         // Serve from Twitter API and store in S3 and Cache
@@ -233,7 +233,7 @@ function GetProcessedSentiment(id){
                             .catch((error) =>{
                                 console.log('Error uploading processed sentiment to S3:\n' + error);
                             });
-                            redisClient.setex(keySentimentProcessed, 360, body);
+                            redisClient.setex(keySentimentProcessed, 60, body);
                             // ------------------------ Resolve Promise ------------------------  //
                             resolve(processedSentimentObject);
                         })
@@ -271,7 +271,7 @@ function GetImportantTerms(id){
                         console.log("Unprocessed sentiment served from S3");
                         const s3ResultParsed = JSON.parse(s3Result.Body);
                         // Add to cache
-                        redisClient.setex(keyImportantTerms, 360, s3Result.Body);
+                        redisClient.setex(keyImportantTerms, 60, s3Result.Body);
                         resolve(s3ResultParsed.twitterFrequentTerms)
                     } else {
                         // Serve from Twitter API and store in S3 and Cache
@@ -315,7 +315,7 @@ function GetImportantTerms(id){
                             .catch((error) =>{
                                 console.log('Error uploading important terms to S3:\n' + error);
                             });
-                            redisClient.setex(keyImportantTerms, 360, body);
+                            redisClient.setex(keyImportantTerms, 60, body);
                             // ------------------------ Resolve Promise ------------------------  //
                             resolve(twitterFrequentTerms);
                         })
@@ -353,7 +353,7 @@ function GetSentiments(id){
                         console.log("Unprocessed sentiment served from S3");
                         const s3ResultParsed = JSON.parse(s3Result.Body);
                         // Add to cache
-                        redisClient.setex(keySentimentUnprocessed, 360, s3Result.Body);
+                        redisClient.setex(keySentimentUnprocessed, 60, s3Result.Body);
                         resolve(s3ResultParsed.tweetSentiments)
                     } else {
                         // Serve from Twitter API and store in S3 and Cache
@@ -380,7 +380,7 @@ function GetSentiments(id){
                             .catch((error) =>{
                                 console.log('Error uploading unprocessed sentiments to S3:\n' + error);
                             });
-                            redisClient.setex(keySentimentUnprocessed, 360, body);
+                            redisClient.setex(keySentimentUnprocessed, 60, body);
                             // ------------------------ Resolve Promise ------------------------  //
                             resolve(tweetSentiments);
                         })
@@ -418,7 +418,7 @@ function TokenizeTweets(id){
                         console.log("Tweet tokens served from S3");
                         const s3ResultParsed = JSON.parse(s3Result.Body);
                         // Add to cache
-                        redisClient.setex(keyTokens, 360, s3Result.Body);
+                        redisClient.setex(keyTokens, 60, s3Result.Body);
                         resolve(s3ResultParsed.tweetsTokens)
                     } else {
                         // Serve from Twitter API and store in S3 and Cache
@@ -443,7 +443,7 @@ function TokenizeTweets(id){
                             .catch((error) =>{
                                 console.log('Error uploading tokens to S3:\n' + error);
                             });
-                            redisClient.setex(keyTokens, 360, body);
+                            redisClient.setex(keyTokens, 60, body);
                             // ------------------------ Resolve Promise ------------------------  //
                             resolve(tweetsTokens);
                         })
@@ -481,7 +481,7 @@ function GetTweets(id){
                         console.log("Tweets served from S3");
                         const s3ResultParsed = JSON.parse(s3Result.Body);
                         // Add to cache
-                        redisClient.setex(keyTweets, 360, s3Result.Body);
+                        redisClient.setex(keyTweets, 60, s3Result.Body);
                         resolve(s3ResultParsed.groupedTweets)
                     } else {
                         console.log("Tweets served from Twitter");
@@ -528,7 +528,7 @@ function GetTweets(id){
                                 .catch((error) =>{
                                     console.log('Error uploading raw tweets to S3:\n' + error);
                                 });
-                                redisClient.setex(keyTweets, 360, body);
+                                redisClient.setex(keyTweets, 60, body);
                                 // ------------------------ Resolve Promise ------------------------  //
                                 resolve(groupedTweets);
                             }
