@@ -18,7 +18,6 @@ function drawBarChart(data) {
 
     // Appends the barchart to the correct place on the DOM
     d3.select("#barchart").html(sentimentChart.outerHTML);
-
 }
 
 // This function sets up the data received from the server to work with the D3 function
